@@ -1,10 +1,13 @@
 import 'dart:developer';
 
+import 'package:flutter/material.dart';
 import 'package:hive/hive.dart';
 import 'package:status_saver/utils/domain/storedetails.dart';
 
+
+
 class AppConstants {
-  static var  hivelangcode;
+  static var hivelangcode;
   static String WHATSAPP_PATH =
       "/storage/emulated/0/Android/media/com.whatsapp/WhatsApp/Media/.Statuses";
   static String NewPath = "/storage/emulated/0/StatusSaver";
@@ -133,17 +136,24 @@ class AppConstants {
     },
   };
 
-                static data(){
-                  Box<Storedetails> dataBox = Hive.box<Storedetails>('DataBox');
-                   List<Storedetails> datmodelList = dataBox.values.toList();
-                log(datmodelList.toString());
-                  for (var storedetails in datmodelList) {
-                  log('Element: ${storedetails.lang}, ${storedetails.mode}');
-               
-                  hivelangcode=storedetails.lang;
-                }
-                return hivelangcode??"en";
-                }
- 
- 
+  static data() {
+    Box<Storedetails> dataBox = Hive.box<Storedetails>('DataBox');
+    List<Storedetails> datmodelList = dataBox.values.toList();
+    log(datmodelList.toString());
+    for (var storedetails in datmodelList) {
+      log('Element: ${storedetails.lang}, ${storedetails.mode}');
+
+      hivelangcode = storedetails.lang;
+    }
+    return hivelangcode ?? "en";
+  }
+
+
+
 }
+
+const TextStyle textStyle = TextStyle(
+  fontSize: 20,
+  fontWeight: FontWeight.w700,
+  color: Colors.green,
+);

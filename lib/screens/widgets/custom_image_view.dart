@@ -43,7 +43,7 @@ class CustomImageView extends StatelessWidget {
             shape: const CircleBorder(),
             heroTag: null,
             backgroundColor: Colors.white,
-            child: const Icon(Icons.download,color: Colors.black,),
+            child: const Icon(Icons.save,color: Colors.black,),
             onPressed: () {
               // ImageGallerySaver.saveFile(imagePath).then((value) {
               //   ScaffoldMessenger.of(context).showSnackBar(const SnackBar(content: Text("Image Saved")));

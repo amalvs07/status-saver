@@ -23,6 +23,9 @@ class _ExpandableImageState extends State<ExpandableImage> with TickerProviderSt
     super.initState();
     _animationController = AnimationController(duration: const Duration(milliseconds: 200), vsync: this);
     _animation = _animationController.drive(Tween<double>(begin: 0.0, end: 0.0)); // Initialize _animation
+    animationListener=(){
+
+    };
   }
 
   @override

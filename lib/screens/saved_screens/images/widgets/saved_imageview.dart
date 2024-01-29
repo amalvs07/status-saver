@@ -4,9 +4,16 @@ import 'dart:io';
 import 'package:flutter/material.dart';
 import 'package:flutter_expandable_fab/flutter_expandable_fab.dart';
 import 'package:flutter_native_api/flutter_native_api.dart';
+import 'package:provider/provider.dart';
 import 'package:status_saver/Constants/deleteFile.dart';
 
+import '../../../../provider/getSavedDataProvider.dart';
 
+  Future<void> refreshImageData(BuildContext context) async {
+    // Add logic to refresh your data here, for example, fetching new data from the server
+    Provider.of<GetSavedDataProvider>(context, listen: false)
+        .getSavedData(".jpg");
+  }
 
 class SavedImageView extends StatelessWidget {
   final _key = GlobalKey<ExpandableFabState>();
@@ -55,7 +62,9 @@ class SavedImageView extends StatelessWidget {
             onPressed: () {
               log("delete");
               DeleteFile.deleteFile(context, imagePath);
+              refreshImageData(context);
               Navigator.pop(context);
+              
             },
           ),
           

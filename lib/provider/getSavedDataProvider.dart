@@ -7,7 +7,7 @@ import 'package:permission_handler/permission_handler.dart';
 import 'package:status_saver/Constants/constant.dart';
 
 class GetSavedDataProvider extends ChangeNotifier {
-    bool _isWhatsappAvaliable = false;
+   bool _isWhatsappAvaliable = false;
   List<FileSystemEntity> _getImages = [];
   List<FileSystemEntity> _getVideos = [];
 
@@ -48,12 +48,11 @@ class GetSavedDataProvider extends ChangeNotifier {
           _getImages = [];
           _getVideos = [];
         }
-         _isWhatsappAvaliable = true;
+          _isWhatsappAvaliable = true;
           notifyListeners();
       }else{
-         _isWhatsappAvaliable = false;
+          _isWhatsappAvaliable = false;
           notifyListeners();
-           log("No WhatsApp directory");
       }
     }
   }

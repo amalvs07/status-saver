@@ -21,7 +21,6 @@ String selectedLanguage = 'Select Language';
 
 String langcode = 'en';
 
-
 bool dark = false;
 Box<Storedetails> dataBox = Hive.box<Storedetails>('DataBox');
 
@@ -31,12 +30,12 @@ class _CustomDrawerState extends State<CustomDrawer> {
     // TODO: implement initState
     super.initState();
     List<Storedetails> datmodelList = dataBox.values.toList();
-                log(datmodelList.toString());
+    log(datmodelList.toString());
     for (var storedetails in datmodelList) {
-                  log('Element: ${storedetails.lang}, ${storedetails.mode}');
-                  dark=storedetails.mode;
-                  langcode=storedetails.lang;
-                }
+      log('Element: ${storedetails.lang}, ${storedetails.mode}');
+      dark = storedetails.mode;
+      langcode = storedetails.lang;
+    }
   }
 
   @override
@@ -150,7 +149,51 @@ class _CustomDrawerState extends State<CustomDrawer> {
                 //   log('Element: ${storedetails.lang}, ${storedetails.mode}');
                 // }
 
-                _showCustomDialog(context);
+                showDialog(
+                  context: context,
+                  builder: (BuildContext context) {
+                    return const AlertDialog(
+                      content: SingleChildScrollView(
+                        child: Column(
+                          mainAxisAlignment: MainAxisAlignment.start,
+                          children: <Widget>[
+                            SizedBox(height: 20,),
+                            Text(
+                              "Disclaimer",
+                              style: textStyle,
+                            ),
+                            SizedBox(height: 10,),
+                            Text(
+                              "Save WhatsApp statuses effortlessly. Enjoy dark mode, language options, and an ad-free experience for seamless media preservation",
+                              textAlign: TextAlign.center,
+                            ),
+                            SizedBox(height: 20,),
+                            Text(
+                              "How to App works?",
+                              style: textStyle,
+                            ),
+                            SizedBox(height: 10,),
+                            Text(
+                              "Sharing, printing, and saving WhatsApp statuses is a breeze with Status Saver. Simply select the desired status, use the share option for quick sharing, or print images directly from the app. Enjoy the convenience of preserving your favorite moments effortlessly.",
+                              textAlign: TextAlign.center,
+                            ),
+                            SizedBox(height: 20,),
+                            Text(
+                              "Limitations",
+                              style: textStyle,
+                            ),
+                            SizedBox(height: 10,),
+                            Text(
+                              "App relies on device storage permissions. Printing may require additional app integration",
+                              textAlign: TextAlign.center,
+                            ),
+                            SizedBox(height: 20,),
+                          ],
+                        ),
+                      ),
+                    );
+                  },
+                );
               },
             ),
           ],
@@ -193,66 +236,4 @@ class _CustomDrawerState extends State<CustomDrawer> {
       });
     }
   }
-  
-   void _showCustomDialog(BuildContext context) {
-    showDialog(
-      context: context,
-      builder: (BuildContext context) {
-        return GestureDetector(
-          onTap: () {
-            Navigator.of(context).pop();
-          },
-          child: Material(
-            type: MaterialType.transparency,
-            child: Center(
-              child: Container(
-                margin: EdgeInsets.symmetric(horizontal: 20),
-                padding: EdgeInsets.all(20),
-                decoration: BoxDecoration(
-                  color: Colors.white,
-                  borderRadius: BorderRadius.circular(10),
-                ),
-                child:const Column(
-                  mainAxisSize: MainAxisSize.min,
-                  children: [
-                    Text(
-                      'Disclaimer',
-                      style: TextStyle(
-                        fontWeight: FontWeight.bold,
-                        color: Colors.green,
-                        fontSize: 18,
-                      ),
-                    ),
-                    SizedBox(height: 10),
-                   
-                    
-                    Text(
-                      ' Status Saver is designed to help users effortlessly save and manage media content from WhatsApp statuses',
-                      style: TextStyle(fontSize: 16,color: Colors.black,),textAlign: TextAlign.center,
-                    ),
-                     Text(
-                      'How App works?',
-                      style: TextStyle(
-                        fontWeight: FontWeight.bold,
-                        color: Colors.green,
-                        fontSize: 18,
-                      ),
-                    ),
-                    SizedBox(height: 10),
-                   
-                    
-                    Text(
-                      'It operates by accessing and retrieving media content from WhatsApp statuses.It allows users to convert image to pdf and print them.And also  download and share both images and videos shared in WhatsApp statuses',
-                      style: TextStyle(fontSize: 16,color: Colors.black,),
-                   textAlign: TextAlign.center ),
-                  ],
-                ),
-              ),
-            ),
-          ),
-        );
-      },
-    );
-  }
-  
 }

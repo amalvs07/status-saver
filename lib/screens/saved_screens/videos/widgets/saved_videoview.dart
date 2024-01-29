@@ -5,10 +5,17 @@ import 'package:chewie/chewie.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_expandable_fab/flutter_expandable_fab.dart';
 import 'package:flutter_native_api/flutter_native_api.dart';
+import 'package:provider/provider.dart';
 import 'package:status_saver/Constants/deleteFile.dart';
 import 'package:video_player/video_player.dart';
 
+import '../../../../provider/getSavedDataProvider.dart';
 
+  Future<void> refreshVideoData(BuildContext context) async {
+    // Add logic to refresh your data here, for example, fetching new data from the server
+    Provider.of<GetSavedDataProvider>(context, listen: false)
+        .getSavedData(".jpg");
+  }
 class SavedVideoView extends StatefulWidget {
   String? VideoPath;
   SavedVideoView({super.key, this.VideoPath});
@@ -85,6 +92,7 @@ class _CustomVideoViewState extends State<SavedVideoView> {
             onPressed: () {
               log("delete");
               DeleteFile.deleteFile(context, widget.VideoPath!);
+              refreshVideoData(context);
               Navigator.pop(context);
             },
           ),

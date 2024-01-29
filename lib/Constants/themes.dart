@@ -40,5 +40,5 @@ class Themes {
     ),
     scaffoldBackgroundColor: Colors.grey[800],
     splashColor: Colors.grey[900],);
-    
+
 }
