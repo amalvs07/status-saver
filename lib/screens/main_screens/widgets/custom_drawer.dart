@@ -6,6 +6,8 @@ import 'package:hive_flutter/hive_flutter.dart';
 import 'package:status_saver/Constants/constant.dart';
 import 'package:status_saver/utils/domain/storedetails.dart';
 
+import '../../../Constants/defaultValues.dart';
+
 class CustomDrawer extends StatefulWidget {
   const CustomDrawer({
     Key? key,
@@ -19,9 +21,9 @@ bool light = false;
 
 String selectedLanguage = 'Select Language';
 
-String langcode = 'en';
 
-bool dark = false;
+
+
 Box<Storedetails> dataBox = Hive.box<Storedetails>('DataBox');
 
 class _CustomDrawerState extends State<CustomDrawer> {
@@ -32,9 +34,13 @@ class _CustomDrawerState extends State<CustomDrawer> {
     List<Storedetails> datmodelList = dataBox.values.toList();
     log(datmodelList.toString());
     for (var storedetails in datmodelList) {
+      
       log('Element: ${storedetails.lang}, ${storedetails.mode}');
-      dark = storedetails.mode;
-      langcode = storedetails.lang;
+      NewValues.darkMode = storedetails.mode;
+      NewValues.langcode = storedetails.lang;
+      NewValues.whatsappPath=storedetails.whatsappfolderpath;
+      NewValues.selectedOrNot=storedetails.selectedOrNot;
+      
     }
   }
 
@@ -61,7 +67,7 @@ class _CustomDrawerState extends State<CustomDrawer> {
                   Padding(
                     padding: EdgeInsets.only(left: 10),
                     child: Text(
-                      AppConstants.translations[langcode]!['appHeading']!,
+                      AppConstants.translations[NewValues.langcode]!['appHeading']!,
                       style: const TextStyle(
                         fontSize: 25,
                         fontWeight: FontWeight.w600,
@@ -72,7 +78,7 @@ class _CustomDrawerState extends State<CustomDrawer> {
                   Padding(
                     padding: EdgeInsets.only(left: 10),
                     child: Text(
-                      AppConstants.translations[langcode]!['downloadAndShare']!,
+                      AppConstants.translations[NewValues.langcode]!['downloadAndShare']!,
                       style: const TextStyle(
                         overflow: TextOverflow.ellipsis,
                         fontSize: 13,
@@ -87,7 +93,7 @@ class _CustomDrawerState extends State<CustomDrawer> {
             Padding(
               padding: EdgeInsets.only(left: 10),
               child: Text(
-                AppConstants.translations[langcode]!['general']!,
+                AppConstants.translations[NewValues.langcode]!['general']!,
                 style: const TextStyle(
                   color: Colors.grey,
                 ),
@@ -98,7 +104,7 @@ class _CustomDrawerState extends State<CustomDrawer> {
               title: Text(selectedLanguage),
               onTap: () {
                 showDropdown(context, AppConstants.options);
-                log(langcode.toString());
+                log(NewValues.langcode.toString());
                 setState(() {});
               },
               trailing: Icon(Icons.arrow_drop_down),
@@ -106,18 +112,17 @@ class _CustomDrawerState extends State<CustomDrawer> {
             Divider(),
             ListTile(
               leading: Icon(Icons.dark_mode),
-              title: Text(AppConstants.translations[langcode]!['darkMode']!),
+              title: Text(AppConstants.translations[NewValues.langcode]!['darkMode']!),
               trailing: Switch(
-                value: dark,
+                value: NewValues.darkMode,
                 activeColor: Colors.green,
                 onChanged: (bool value) {
                   setState(() {
-                    dark = value;
-                    dark
+                    NewValues.darkMode = value;
+                    NewValues.darkMode
                         ? AdaptiveTheme.of(context).setDark()
                         : AdaptiveTheme.of(context).setLight();
-                    dataBox.put(
-                        "darkMode", Storedetails(mode: dark, lang: langcode));
+        dataBox.put("darkMode", Storedetails(mode: NewValues.darkMode, lang: NewValues.langcode,whatsappfolderpath:NewValues.whatsappPath,selectedOrNot:NewValues.selectedOrNot));
                   });
                 },
               ),
@@ -140,7 +145,7 @@ class _CustomDrawerState extends State<CustomDrawer> {
             Divider(),
             ListTile(
               leading: Icon(Icons.info),
-              title: Text(AppConstants.translations[langcode]!['about']!),
+              title: Text(AppConstants.translations[NewValues.langcode]!['about']!),
               onTap: () {
                 // log(dataBox.get("darkMode").toString());
                 // List<Storedetails> catModelList = dataBox.values.toList();
@@ -231,8 +236,8 @@ class _CustomDrawerState extends State<CustomDrawer> {
     if (result != null) {
       setState(() {
         selectedLanguage = result;
-        langcode = AppConstants.optionsCode[options.indexOf(result)];
-        dataBox.put("darkMode", Storedetails(mode: dark, lang: langcode));
+        NewValues.langcode = AppConstants.optionsCode[options.indexOf(result)];
+        dataBox.put("darkMode", Storedetails(mode: NewValues.darkMode, lang: NewValues.langcode,whatsappfolderpath:NewValues.whatsappPath,selectedOrNot:NewValues.selectedOrNot));
       });
     }
   }

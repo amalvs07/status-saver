@@ -32,33 +32,35 @@ class SavedImageGridView extends StatelessWidget {
 
         return RefreshIndicator(
           onRefresh: () => _refreshData(context),
-          child:file.isWhatsappAvaliable == false
-                ? Center(
-                    child: TextButton(
-                      onPressed: () {
+          child:
+          
+          // file.isWhatsappAvaliable == false
+          //       ? Center(
+          //           child: TextButton(
+          //             onPressed: () {
                        
-          file.getSavedData(".jpg");
+          // file.getSavedData(".jpg");
 
          
-                      },
-                      child:  Text(
-                        'Grant Permissions',
-                        style: TextStyle(
-                          color: Colors.white,
-                          fontSize: 16,
-                        ),
-                      ),
-                      style: TextButton.styleFrom(
-                        backgroundColor: Colors.green,
-                        padding:
-                            EdgeInsets.symmetric(horizontal: 20, vertical: 10),
-                        shape: RoundedRectangleBorder(
-                          borderRadius: BorderRadius.circular(8),
-                        ),
-                      ),
-                    ),
-                  )
-                : 
+          //             },
+          //             child:  Text(
+          //               'Grant Permissions',
+          //               style: TextStyle(
+          //                 color: Colors.white,
+          //                 fontSize: 16,
+          //               ),
+          //             ),
+          //             style: TextButton.styleFrom(
+          //               backgroundColor: Colors.green,
+          //               padding:
+          //                   EdgeInsets.symmetric(horizontal: 20, vertical: 10),
+          //               shape: RoundedRectangleBorder(
+          //                 borderRadius: BorderRadius.circular(8),
+          //               ),
+          //             ),
+          //           ),
+          //         )
+          //       : 
            file.getImages.isEmpty
               ? const Center(
                   child: Text("No Image Downloaded"),

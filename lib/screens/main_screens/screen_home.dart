@@ -21,7 +21,7 @@ class HomeScreen extends StatefulWidget {
 
 class _HomeScreenState extends State<HomeScreen> {
   final _pages = [
-    const ScreenImage(),
+     ScreenImage(),
     const ScreenVideo(),
     const ScreenSaved(),
   ];
@@ -53,10 +53,10 @@ class _HomeScreenState extends State<HomeScreen> {
           const SizedBox(
             width: 20,
           ),
-          const Icon(Icons.share),
-          const SizedBox(
-            width: 20,
-          ),
+          // const Icon(Icons.share),
+          // const SizedBox(
+          //   width: 20,
+          // ),
         ],
       ),
       drawer:const CustomDrawer(),

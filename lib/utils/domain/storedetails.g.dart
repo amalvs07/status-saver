@@ -19,17 +19,23 @@ class StoredetailsAdapter extends TypeAdapter<Storedetails> {
     return Storedetails(
       lang: fields[0] as String,
       mode: fields[1] as bool,
+      whatsappfolderpath: fields[2] as String,
+      selectedOrNot: fields[3] as int,
     );
   }
 
   @override
   void write(BinaryWriter writer, Storedetails obj) {
     writer
-      ..writeByte(2)
+      ..writeByte(4)
       ..writeByte(0)
       ..write(obj.lang)
       ..writeByte(1)
-      ..write(obj.mode);
+      ..write(obj.mode)
+      ..writeByte(2)
+      ..write(obj.whatsappfolderpath)
+      ..writeByte(3)
+      ..write(obj.selectedOrNot);
   }
 
   @override

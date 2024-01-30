@@ -26,4 +26,7 @@ class DeleteFile {
       log("Error deleting file: $e");
     }
   }
+
+
+
 }

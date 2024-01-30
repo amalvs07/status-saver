@@ -18,17 +18,17 @@ class GetSavedDataProvider extends ChangeNotifier {
   void getSavedData(String extention) async {
     var storage = await Permission.manageExternalStorage.status;
     final deviceInfo = await DeviceInfoPlugin().androidInfo;
-    if (storage.isDenied) {
-      if (deviceInfo.version.sdkInt > 32) {
-        await Permission.photos.request();
-        await Permission.manageExternalStorage.request();
-      } else {
-        await Permission.storage.request();
-        await Permission.manageExternalStorage.request();
-      }
+    // if (storage.isDenied) {
+    //   if (deviceInfo.version.sdkInt > 32) {
+    //     await Permission.photos.request();
+    //     await Permission.manageExternalStorage.request();
+    //   } else {
+    //     await Permission.storage.request();
+    //     await Permission.manageExternalStorage.request();
+    //   }
 
-      log("Granded before"); // it should print PermissionStatus.granted
-    }
+    //   log("Granded before");
+    // }
     if (storage.isGranted) {
       final directorys = Directory(AppConstants.NewPath);
       log(directorys.toString());

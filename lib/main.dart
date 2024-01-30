@@ -2,6 +2,7 @@ import 'package:adaptive_theme/adaptive_theme.dart';
 import 'package:flutter/material.dart';
 import 'package:hive_flutter/hive_flutter.dart';
 import 'package:provider/provider.dart';
+import 'package:status_saver/provider/getPermissionManager.dart';
 import 'package:status_saver/provider/getSavedDataProvider.dart';
 import 'package:status_saver/utils/domain/storedetails.dart';
 
@@ -34,6 +35,9 @@ class MyApp extends StatelessWidget {
         ),
         ChangeNotifierProvider(
           create: (_) => GetSavedDataProvider(),
+        ),
+        ChangeNotifierProvider(
+          create: (_) => PermissionManager(),
         ),
       ],
       child: AdaptiveTheme(

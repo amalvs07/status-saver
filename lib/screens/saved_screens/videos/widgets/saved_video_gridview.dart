@@ -29,29 +29,33 @@ class SavedVideoGridView extends StatelessWidget {
 
       return RefreshIndicator(
         onRefresh: () => _refreshData(context),
-        child: file.isWhatsappAvaliable == false
-            ? Center(
-                child: TextButton(
-                  onPressed: () {
-                    file.getSavedData(".mp4");
-                  },
-                  child: Text(
-                    'Grant Permissions',
-                    style: TextStyle(
-                      color: Colors.white,
-                      fontSize: 16,
-                    ),
-                  ),
-                  style: TextButton.styleFrom(
-                    backgroundColor: Colors.green,
-                    padding: EdgeInsets.symmetric(horizontal: 20, vertical: 10),
-                    shape: RoundedRectangleBorder(
-                      borderRadius: BorderRadius.circular(8),
-                    ),
-                  ),
-                ),
-              )
-            : file.getVideos.isEmpty
+        child: 
+        
+        // file.isWhatsappAvaliable == false
+        //     ? Center(
+        //         child: TextButton(
+        //           onPressed: () {
+        //             file.getSavedData(".mp4");
+        //           },
+        //           child: Text(
+        //             'Grant Permissions',
+        //             style: TextStyle(
+        //               color: Colors.white,
+        //               fontSize: 16,
+        //             ),
+        //           ),
+        //           style: TextButton.styleFrom(
+        //             backgroundColor: Colors.green,
+        //             padding: EdgeInsets.symmetric(horizontal: 20, vertical: 10),
+        //             shape: RoundedRectangleBorder(
+        //               borderRadius: BorderRadius.circular(8),
+        //             ),
+        //           ),
+        //         ),
+        //       )
+        //     : 
+            
+            file.getVideos.isEmpty
                 ? const Center(
                     child: Text("No Video Downloaded"),
                   )
