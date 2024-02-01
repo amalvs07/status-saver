@@ -3,10 +3,14 @@ import 'dart:developer';
 import 'package:adaptive_theme/adaptive_theme.dart';
 import 'package:flutter/material.dart';
 import 'package:hive_flutter/hive_flutter.dart';
-import 'package:status_saver/Constants/constant.dart';
-import 'package:status_saver/utils/domain/storedetails.dart';
 
+import '../../../Constants/constant.dart';
 import '../../../Constants/defaultValues.dart';
+import '../../../utils/domain/storedetails.dart';
+
+
+
+
 
 class CustomDrawer extends StatefulWidget {
   const CustomDrawer({
@@ -26,21 +30,22 @@ String selectedLanguage = 'Select Language';
 
 Box<Storedetails> dataBox = Hive.box<Storedetails>('DataBox');
 
+
+
 class _CustomDrawerState extends State<CustomDrawer> {
   @override
   void initState() {
     // TODO: implement initState
     super.initState();
-    List<Storedetails> datmodelList = dataBox.values.toList();
+   List<Storedetails> datmodelList = dataBox.values.toList();
     log(datmodelList.toString());
+   
     for (var storedetails in datmodelList) {
-      
-      log('Element: ${storedetails.lang}, ${storedetails.mode}');
-      NewValues.darkMode = storedetails.mode;
+      log('Element: ${storedetails.lang}, ${storedetails.mode},${storedetails.whatsappfolderpath}');
+            NewValues.darkMode = storedetails.mode;
       NewValues.langcode = storedetails.lang;
       NewValues.whatsappPath=storedetails.whatsappfolderpath;
       NewValues.selectedOrNot=storedetails.selectedOrNot;
-      
     }
   }
 
@@ -241,4 +246,7 @@ class _CustomDrawerState extends State<CustomDrawer> {
       });
     }
   }
+
+
+  
 }

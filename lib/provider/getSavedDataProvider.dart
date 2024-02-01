@@ -3,56 +3,117 @@ import 'dart:io';
 
 import 'package:device_info_plus/device_info_plus.dart';
 import 'package:flutter/material.dart';
+import 'package:fluttertoast/fluttertoast.dart';
+import 'package:path_provider/path_provider.dart';
 import 'package:permission_handler/permission_handler.dart';
-import 'package:status_saver/Constants/constant.dart';
+
+import '../Constants/constant.dart';
 
 class GetSavedDataProvider extends ChangeNotifier {
-   bool _isWhatsappAvaliable = false;
+  String selectedLocationPath = "";
+
+  bool _isWhatsappAvaliable = false;
+  bool _isPermisionAvaliable = false;
   List<FileSystemEntity> _getImages = [];
   List<FileSystemEntity> _getVideos = [];
 
   List<FileSystemEntity> get getImages => _getImages;
   List<FileSystemEntity> get getVideos => _getVideos;
-    bool get isWhatsappAvaliable => _isWhatsappAvaliable;
+
+  bool get isWhatsappAvaliable => _isWhatsappAvaliable;
+  bool get isPermisionAvaliable => _isPermisionAvaliable;
 
   void getSavedData(String extention) async {
+  
+    var status = await Permission.storage.status;
+    var photo = await Permission.photos.status;
     var storage = await Permission.manageExternalStorage.status;
-    final deviceInfo = await DeviceInfoPlugin().androidInfo;
-    // if (storage.isDenied) {
-    //   if (deviceInfo.version.sdkInt > 32) {
-    //     await Permission.photos.request();
-    //     await Permission.manageExternalStorage.request();
-    //   } else {
-    //     await Permission.storage.request();
-    //     await Permission.manageExternalStorage.request();
-    //   }
+    // final deviceInfo = await DeviceInfoPlugin().androidInfo;
 
-    //   log("Granded before");
+    // if (deviceInfo.version.sdkInt > 32) {
+    //   await Permission.photos.request();
+    //   await Permission.manageExternalStorage.request();
+    // } else {
+    //   await Permission.storage.request();
+    //   await Permission.manageExternalStorage.request();
     // }
-    if (storage.isGranted) {
-      final directorys = Directory(AppConstants.NewPath);
-      log(directorys.toString());
 
-      if (directorys.existsSync()) {
-        final items = directorys.listSync();
+    log("Granded before"); // it should print PermissionStatus.granted
+  
 
-        if (extention == ".mp4") {
-          _getVideos =
-              items.where((element) => element.path.endsWith(".mp4")).toList();
-          notifyListeners();
-        } else if (extention == ".jpg") {
-          _getImages =
-              items.where((element) => element.path.endsWith(".jpg")).toList();
-          notifyListeners();
-        } else {
-          _getImages = [];
-          _getVideos = [];
-        }
+    if (storage.isGranted || status.isGranted || photo.isGranted) {
+      // Create a Directory object
+      String folderPath = AppConstants.NewPath;
+      Directory folder = Directory(folderPath);
+
+      // Check if the folder doesn't exist, then create it
+      if (!folder.existsSync()) {
+        folder.createSync(
+            recursive:
+                true); // 'recursive: true' creates parent directories if they don't exist
+        print('Folder created: $folderPath');
+      } else {
+        print('Folder already exists: $folderPath');
+      }
+
+      Directory? directory = await getExternalStorageDirectory();
+
+      if (directory != null) {
+        // log(directory.path);
+
+        final directoryPath =AppConstants.NewPath;
+           
+        final directorys = Directory(directoryPath);
+        log(directorys.toString());
+
+        if (directorys.existsSync()) {
+          final items = directorys.listSync();
+
+          if (extention == ".mp4") {
+            _getVideos = items
+                .where((element) => element.path.endsWith(".mp4"))
+                .toList();
+            _isPermisionAvaliable = true;
+            notifyListeners();
+          } else if (extention == ".jpg") {
+            _getImages = items
+                .where((element) => element.path.endsWith(".jpg"))
+                .toList();
+
+            _isPermisionAvaliable = true;
+            notifyListeners();
+          } else {
+            _getImages = [];
+            _getVideos = [];
+          }
           _isWhatsappAvaliable = true;
           notifyListeners();
-      }else{
+          // log(items.toString());
+        } else {
+          log("No WhatsApp directory");
           _isWhatsappAvaliable = false;
           notifyListeners();
+            Fluttertoast.showToast(
+          msg: "No WhatsApp directory",
+          toastLength: Toast.LENGTH_SHORT,
+          gravity: ToastGravity.BOTTOM,
+          timeInSecForIosWeb: 1,
+          backgroundColor: Colors.black,
+          textColor: Colors.white,
+          fontSize: 16.0,
+        );
+        }
+      } else {
+        log("External storage directory not available or permission not granted");
+         Fluttertoast.showToast(
+          msg: "External storage directory not available or permission not granted",
+          toastLength: Toast.LENGTH_SHORT,
+          gravity: ToastGravity.BOTTOM,
+          timeInSecForIosWeb: 1,
+          backgroundColor: Colors.black,
+          textColor: Colors.white,
+          fontSize: 16.0,
+        );
       }
     }
   }

@@ -2,8 +2,8 @@ import 'dart:io';
 
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
-import 'package:status_saver/provider/getStatusProvider.dart';
 
+import '../../provider/getStatusProvider.dart';
 import 'custom_image_view.dart';
 
 class CustomImageGridView extends StatelessWidget {

@@ -2,9 +2,10 @@ import 'dart:io';
 
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
-import 'package:status_saver/provider/getSavedDataProvider.dart';
-import 'package:status_saver/utils/videoThumbital.dart';
 
+
+import '../../../../provider/getSavedDataProvider.dart';
+import '../../../../utils/videoThumbital.dart';
 import 'saved_videoview.dart';
 
 class SavedVideoGridView extends StatelessWidget {

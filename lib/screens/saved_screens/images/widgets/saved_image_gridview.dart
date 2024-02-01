@@ -2,8 +2,8 @@ import 'dart:io';
 
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
-import 'package:status_saver/provider/getSavedDataProvider.dart';
 
+import '../../../../provider/getSavedDataProvider.dart';
 import 'saved_imageview.dart';
 
 class SavedImageGridView extends StatelessWidget {

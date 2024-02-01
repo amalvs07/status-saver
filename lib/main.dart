@@ -2,13 +2,14 @@ import 'package:adaptive_theme/adaptive_theme.dart';
 import 'package:flutter/material.dart';
 import 'package:hive_flutter/hive_flutter.dart';
 import 'package:provider/provider.dart';
-import 'package:status_saver/provider/getPermissionManager.dart';
-import 'package:status_saver/provider/getSavedDataProvider.dart';
-import 'package:status_saver/utils/domain/storedetails.dart';
+
 
 import 'Constants/themes.dart';
+import 'provider/getPermissionManager.dart';
+import 'provider/getSavedDataProvider.dart';
 import 'provider/getStatusProvider.dart';
 import 'screens/splash_screens/screen_splash.dart';
+import 'utils/domain/storedetails.dart';
 
 
 void main() async{

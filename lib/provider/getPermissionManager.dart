@@ -9,9 +9,9 @@ import 'package:permission_handler/permission_handler.dart';
 import 'package:device_info_plus/device_info_plus.dart';
 import 'dart:developer' as developer;
 
-import 'package:status_saver/utils/domain/storedetails.dart';
 
 import '../Constants/defaultValues.dart';
+import '../utils/domain/storedetails.dart';
 
 class PermissionManager extends ChangeNotifier {
   int? _storagePermissionCheck;

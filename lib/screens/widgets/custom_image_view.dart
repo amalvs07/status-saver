@@ -4,11 +4,11 @@ import 'dart:io';
 import 'package:flutter/material.dart';
 import 'package:flutter_expandable_fab/flutter_expandable_fab.dart';
 import 'package:flutter_native_api/flutter_native_api.dart';
-import 'package:image_gallery_saver/image_gallery_saver.dart';
-import 'package:path_provider/path_provider.dart';
-import 'package:status_saver/Constants/constant.dart';
-import 'package:status_saver/Constants/saveToFolder.dart';
-import 'package:status_saver/screens/widgets/expandableImage.dart';
+
+import 'package:whatsappsaver/screens/widgets/expandableImage.dart';
+
+import '../../Constants/saveToFolder.dart';
+
 
 class CustomImageView extends StatelessWidget {
   final _key = GlobalKey<ExpandableFabState>();

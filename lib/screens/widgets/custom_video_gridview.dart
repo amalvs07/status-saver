@@ -2,9 +2,10 @@ import 'dart:io';
 
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
-import 'package:status_saver/utils/videoThumbital.dart';
+
 
 import '../../provider/getStatusProvider.dart';
+import '../../utils/videoThumbital.dart';
 import 'custom_video_view.dart';
 
 class CustomVideoGridView extends StatelessWidget {

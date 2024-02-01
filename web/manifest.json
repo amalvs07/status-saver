@@ -1,6 +1,6 @@
 {
-    "name": "status_saver",
-    "short_name": "status_saver",
+    "name": "whatsappsaver",
+    "short_name": "whatsappsaver",
     "start_url": ".",
     "display": "standalone",
     "background_color": "#0175C2",

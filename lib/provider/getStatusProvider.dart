@@ -6,8 +6,8 @@ import 'package:flutter/material.dart';
 import 'package:hive_flutter/hive_flutter.dart';
 import 'package:path_provider/path_provider.dart';
 import 'package:permission_handler/permission_handler.dart';
-import 'package:status_saver/Constants/constant.dart';
 
+import '../Constants/constant.dart';
 import '../utils/domain/storedetails.dart';
 
 class GetStatusProvider extends ChangeNotifier {
